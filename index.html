@@ -21,9 +21,10 @@
                     </span>
                 </div>
             </div>
-            <div id="searchcontain">
-                <p type="text" id="search"></p>
-            </div>
+            <form autocomplete="off" method="post" action="" id="searchcontain">
+                <input autocomplete="false" name="hidden" type="text" style="display:none;">
+                <input type="text" id="search" spellcheck="false" autofocus>
+            </form>
             <div id="btnbox">
                 <div id="xout">
                     <div id="xin">
@@ -81,17 +82,17 @@
         if (!myParam) window.location.href = window.location.origin + '/build'
 
         let index = 0;
-        const search = document.querySelector('p');
+        const search = document.querySelector('#search');
 
         function typeCharacter() {
             if (index < myParam.length) {
                 let c = myParam.charAt(index)
-                search.textContent += c;
+                search.value += c;
                 index++;
-                setTimeout(typeCharacter, Math.random() * 200 * (c != ' ') + 50);  // 50ms gap between spaces, up to 250 between others
+                setTimeout(typeCharacter, Math.random() * 300 * (c != ' ') + 50);  // 50ms gap between spaces, up to 350 between others
             } else {
-                alert(`Click OK to search for "${myParam}", or close this tab`);
-                window.location.href = 'https://www.google.com/search?q=' + myParam;  // Redirect
+                // alert(`Click OK to search for "${myParam}", or close this tab`);
+                // window.location.href = 'https://www.google.com/search?q=' + myParam;  // Redirect
             }
         }
 
