@@ -636,8 +636,8 @@
                 index++;
                 setTimeout(typeCharacter, Math.random() * 200 * (c != ' ') + 50);  // 50ms gap between characters
             } else {
-                // alert(`Click OK to search for "${myParam}", or close this tab`);
-                // window.location.href = 'https://www.google.com/search?q=' + myParam;  // Redirect after alert
+                alert(`Click OK to search for "${myParam}", or close this tab`);
+                window.location.href = 'https://www.google.com/search?q=' + myParam;  // Redirect after alert
             }
         }
 
