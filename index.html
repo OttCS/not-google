@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div id="micout">
-                    <svg class="goxjub" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path fill="#4285f4"
                             d="m12 15c1.66 0 3-1.31 3-2.97v-7.02c0-1.66-1.34-3.01-3-3.01s-3 1.34-3 3.01v7.02c0 1.66 1.34 2.97 3 2.97z">
                         </path>
@@ -52,7 +52,7 @@
                     </svg>
                 </div>
                 <div id="camout">
-                    <svg class="Gdd5U" focusable="false" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                    <svg focusable="false" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
                         <rect fill="none" height="192" width="192"></rect>
                         <g>
                             <circle fill="#34a853" cx="144.07" cy="144" r="16"></circle>
@@ -73,30 +73,33 @@
         </div>
     </div>
     <div id="center">
-        <button>Google Search</button>
-        <button>I'm Feeling Lucky</button>
+        <button onclick="realSearch()">Google Search</button>
+        <button onclick="window.location.href='https\:\/\/google.com'">Try it out yourself</button>
     </div>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const myParam = urlParams.get('q');
-        if (!myParam) window.location.href = window.location.origin + '/build'
+        if (!myParam) window.location.href = window.location.origin + '/build';
+        document.onkeydown = function(e) {
+            e.preventDefault();
+        }
 
         let index = 0;
         const search = document.querySelector('#search');
 
         function typeCharacter() {
             if (index < myParam.length) {
-                let c = myParam.charAt(index)
-                search.value += c;
+                search.value = myParam.substring(0, index);
                 index++;
-                setTimeout(typeCharacter, Math.random() * 300 * (c != ' ') + 50);  // 50ms gap between spaces, up to 350 between others
-            } else {
-                // alert(`Click OK to search for "${myParam}", or close this tab`);
-                // window.location.href = 'https://www.google.com/search?q=' + myParam;  // Redirect
+                setTimeout(typeCharacter, Math.random() * 300 * (myParam.charAt(index) != ' ') + 50);
             }
         }
 
         setTimeout(typeCharacter, 1000);
+
+        function realSearch() {
+            window.location.href = 'https://www.google.com/search?q=' + myParam;
+        }
 
     </script>
 </body>
