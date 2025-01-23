@@ -2,11 +2,12 @@
 <html>
 
 <head>
-    <title>Google Search</title>
+    <title>GoogleThat</title>
     <link rel="stylesheet" href="s.css">
 </head>
 
 <body>
+    <p>Share a helpful tutorial on how to search</p>
     <img src="g.png" width="272px">
     <div id="sb">
         <div id="slightlyinner">
@@ -21,10 +22,11 @@
                     </span>
                 </div>
             </div>
-            <div id="searchcontain">
-                <p type="text" id="search"></p>
-            </div>
-            <!-- <div id="btnbox">
+            <form autocomplete="off" method="post" action="" id="searchcontain">
+                <input autocomplete="false" name="hidden" type="text" style="display:none;">
+                <input type="text" id="search" autofocus>
+            </form>
+            <div id="btnbox" onclick="document.querySelector('#search').value = '';updateURL();">
                 <div id="xout">
                     <div id="xin">
                         <span>
@@ -35,7 +37,7 @@
                             </svg>
                         </span>
                     </div>
-                </div> -->
+                </div>
                 <div id="micout">
                     <svg class="goxjub" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path fill="#4285f4"
@@ -72,31 +74,34 @@
         </div>
     </div>
     <div id="center">
-        <button>Google Search</button>
-        <button>I'm Feeling Lucky</button>
+        <button id="out" title="Click to copy">...</button>
+        <button id="demo">Demo</button>
     </div>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const myParam = urlParams.get('q');
-        if (!myParam) window.location.href = window.location.origin + '/build'
-
-        let index = 0;
-        const search = document.querySelector('p');
-
-        function typeCharacter() {
-            if (index < myParam.length) {
-                let c = myParam.charAt(index)
-                search.textContent += c;
-                index++;
-                setTimeout(typeCharacter, Math.random() * 200 * (c != ' ') + 50);  // 50ms gap between spaces, up to 250 between others
+        const lnk = window.location.origin + '/index.html?q=';
+        const s = document.querySelector('#search');
+        s.onfocus = s.onblur = s.onchange = s.onkeyup = s.onkeydown = s.onkeypress = updateURL;
+        const out = document.querySelector('#out');
+        out.onclick = function () {
+            navigator.clipboard.writeText(out.textContent);
+            window.alert('Copied: ' + out.textContent);
+        }
+        document.querySelector('#demo').onclick = function () {
+            if (s.value == '')
+                window.open(lnk + 'Here%20is%20what%20your%20search%20will%20look%20like!')
+            else
+                window.open(out.textContent);
+            }
+        function updateURL() {
+            if (s.value == '') {
+                out.textContent = '...'
             } else {
-                alert(`Click OK to search for "${myParam}", or close this tab`);
-                window.location.href = 'https://www.google.com/search?q=' + myParam;  // Redirect
+                out.textContent = lnk + encodeURI(s.value);
             }
         }
-
-        setTimeout(typeCharacter, 1000);
-
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const myParam = urlParams.get('q');
+        // alert(encodeURLComponent(myParam))
     </script>
 </body>
 
