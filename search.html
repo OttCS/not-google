@@ -3,10 +3,6 @@
 
 <head>
     <title>Google Search</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
     <style>
         body {
             display: flex;
@@ -627,17 +623,17 @@
         const myParam = urlParams.get('q');
 
         let index = 0;
-        const search = document.querySelector('p');  // Adjust this to your specific input element
+        const search = document.querySelector('p');
 
         function typeCharacter() {
             if (index < myParam.length) {
                 let c = myParam.charAt(index)
                 search.textContent += c;
                 index++;
-                setTimeout(typeCharacter, Math.random() * 200 * (c != ' ') + 50);  // 50ms gap between characters
+                setTimeout(typeCharacter, Math.random() * 200 * (c != ' ') + 50);  // 50ms gap between spaces, up to 250 between others
             } else {
                 alert(`Click OK to search for "${myParam}", or close this tab`);
-                window.location.href = 'https://www.google.com/search?q=' + myParam;  // Redirect after alert
+                window.location.href = 'https://www.google.com/search?q=' + myParam;  // Redirect
             }
         }
 
