@@ -618,7 +618,6 @@
     <script>
         const s = document.querySelector('#search');
         s.onfocus = s.onblur = s.onchange = s.onkeyup = s.onkeydown = s.onkeypress = updateURL;
-        s.defaultValue = "How does water stay on the earth if it's round?"
         const out = document.querySelector('#out');
         out.onclick = function () {
             navigator.clipboard.writeText(out.textContent);
