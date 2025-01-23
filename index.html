@@ -88,7 +88,7 @@
         const search = document.querySelector('#search');
 
         function typeCharacter() {
-            if (index < myParam.length) {
+            if (index <= myParam.length) {
                 search.value = myParam.substring(0, index);
                 index++;
                 setTimeout(typeCharacter, Math.random() * 300 * (myParam.charAt(index) != ' ') + 50);
